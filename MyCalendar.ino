@@ -1,7 +1,7 @@
 #include "Scheduler.h"
 #include "TemperatureReader.h"
 #include "TimeController.h"
-#include "DisplayManager.h"
+#include "DisplayMgrImpl.h"
 #include "CommandMgr.h"
 #include "LunarConverter.h"
 #include "ButtonManager.h"
@@ -9,7 +9,7 @@
 Scheduler * scheduler = Scheduler::instance();
 TemperatureReader * temperatureReader = TemperatureReader::instance();
 TimeController * timeController = TimeController::instance();
-DisplayManager * displayManager = DisplayManager::instance();
+DisplayMgrImpl * displayManager = DisplayMgrImpl::instance();
 CommandMgr * commandMgr = CommandMgr::instance();
 LunarConverter * conv = LunarConverter::instance();
 ButtonManager * buttonMgr = ButtonManager::instance();

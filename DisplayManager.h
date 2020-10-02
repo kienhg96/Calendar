@@ -6,13 +6,10 @@
 #include "LunarConverter.h"
 
 class DisplayManager {
-private:
-	static DisplayManager * _instance;
+public:
 	DisplayManager();
-public:
-	static DisplayManager * instance();
-	~DisplayManager();
-public:
+	virtual ~DisplayManager();
+
 	void init(Scheduler * scheduler,
 			TimeController * timeController,
 			TemperatureReader * tempReader,
@@ -20,8 +17,8 @@ public:
 	static void updateTempDisplay(void * data);
 	static void updateTimeDisplay(void * data);
 	static void updateBlinking(void * data);
-	void setValue(int mode, int32_t value);
-	void setVisible(int mode, bool visible);
+	virtual void setValue(int mode, int32_t value) = 0;
+	virtual void setVisible(int mode, bool visible) = 0;
 	void tick();
 private:
 	TimeController * _timeCtrl;

@@ -1,14 +1,5 @@
 #include "DisplayManager.h"
 
-DisplayManager * DisplayManager::_instance = nullptr;
-
-DisplayManager * DisplayManager::instance() {
-	if (!_instance) {
-		_instance = new DisplayManager();
-	}
-	return _instance;
-}
-
 DisplayManager::DisplayManager() {
 	_blinkingMode = NO_SETUP;
 	_visible = true;
@@ -55,7 +46,8 @@ void DisplayManager::updateTimeDisplay(void * data) {
 
 void DisplayManager::updateBlinking(void * data) {
 	DisplayManager * self = (DisplayManager *) data;
-	self->setVisible(self->_blinkingMode, !self->_visible);
+	self->_visible = !self->_visible;
+	self->setVisible(self->_blinkingMode, self->_visible);
 }
 
 void DisplayManager::tick() {
@@ -64,47 +56,4 @@ void DisplayManager::tick() {
 	setVisible(_blinkingMode, true);
 	_blinkingMode = _timeCtrl->getSetupTimeMode();
 	setVisible(_blinkingMode, visible); // Restore last state
-}
-
-void DisplayManager::setVisible(int mode, bool visible) {
-	_visible = visible;
-	// TODO: Set Display visible here
-	switch (_blinkingMode) {
-		case DAY_MODE:
-			break;
-		case MONTH_MODE:
-			break;
-		case YEAR_MODE:
-			break;
-		case HOUR_MODE:
-			break;
-		case MIN_MODE:
-			break;
-		default:
-		// Blink LED
-			break;
-	}
-}
-
-void DisplayManager::setValue(int mode, int32_t value) {
-	switch (_blinkingMode) {
-		case DAY_MODE:
-			break;
-		case MONTH_MODE:
-			break;
-		case YEAR_MODE:
-			break;
-		case HOUR_MODE:
-			break;
-		case MIN_MODE:
-			break;
-		case TEMPERATURE_MODE:
-			break;
-		case LUNAR_DAY_MODE:
-			break;
-		case LUNAR_MONTH_MODE:
-			break;
-		case WEEK_DAY_MODE:
-			break;
-	}
 }
