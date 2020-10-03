@@ -3,8 +3,8 @@
 #include <Arduino.h>
 #include "Types.h"
 #include "Collections.h"
+#include "Pins.h"
 
-#define BUTTON_PIN A0
 #define ANALOG_NO_SIGNAL 10
 
 struct Button {

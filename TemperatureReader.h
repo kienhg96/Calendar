@@ -2,8 +2,7 @@
 #define __TEMP_READER__
 #include <Arduino.h>
 #include "Scheduler.h"
-
-#define TEMPERATURE_INPUT_PIN A1
+#include "Pins.h"
 
 class TemperatureReader {
 private:
