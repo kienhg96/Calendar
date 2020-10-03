@@ -40,22 +40,40 @@ void CommandMgr::tick() {
 			_index++;
 		}
 	}
+	if (_index >= BUFFER_SIZE) {
+		Serial.println("Command buffer is overflow, processing...");
+		processCommand();
+	}
 }
 
 void CommandMgr::registerHandler(const char * name, Callback callback, void * data) {
+	Serial.print("Register handler: ");
+	Serial.println(name);
 	
+	CommandHandler * handler = new CommandHandler();
+	char * name_clone = new char[strlen(name) + 1];
+	strcpy(name_clone, name);
+	handler->name = name_clone;
+	handler->callback = callback;
+	handler->data = data;
 }
 
 void CommandMgr::processCommand() {
 	Serial.print("Command received: ");
-	Serial.println(_buffer);
+	Serial.print(_buffer);
 
 	LinkedListIterator it = _handlers->iterator();
+	bool notFound = true;
 	while (it.hasNext()) {
 		CommandHandler * handler = (CommandHandler *) it.next();
 		if (strcmp(handler->name, _buffer) == 0) {
+			Serial.println(", processing...");
 			handler->callback(handler->data);
+			notFound = false;
 			break;
 		}
+	}
+	if (notFound) {
+		Serial.println(", not found.");
 	}
 }
